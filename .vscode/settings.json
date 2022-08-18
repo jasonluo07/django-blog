@@ -1,0 +1,24 @@
+{
+    "files.autoSave": "afterDelay",
+    "editor.formatOnSave": true,
+    "python.formatting.provider": "black",
+    "python.sortImports.args": [
+        "--profile=black",
+    ],
+    "[python]": {
+        "editor.codeActionsOnSave": {
+            "source.organizeImports": true
+        },
+        "editor.formatOnPaste": false
+    },
+    "html.format.endWithNewline": true,
+    "files.associations": {
+        "**/*.html": "html",
+        "**/templates/**/*.html": "django-html",
+        "**/templates/**/*": "django-txt",
+        "**/requirements{/**,*}.{txt,in}": "pip-requirements"
+    },
+    "emmet.includeLanguages": {
+        "django-html": "html"
+    }
+}
