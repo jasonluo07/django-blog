@@ -78,8 +78,17 @@ def index(request):
 
 
 def post_list(request):
-    return render(request, "blog/post-list.html")
+    context = {
+        "posts": all_posts,
+    }
+
+    return render(request, "blog/post-list.html", context)
 
 
 def post_detail(request, slug):
-    return render(request, "blog/post-detail.html")
+    post = next(post for post in all_posts if post["slug"] == slug)
+    context = {
+        "post": post,
+    }
+
+    return render(request, "blog/post-detail.html", context)
