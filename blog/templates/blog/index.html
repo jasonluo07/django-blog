@@ -12,7 +12,7 @@
 {% block content %}
 <section id="welcome">
     <header>
-        <img src="" alt="Jason - The Author of This Blog">
+        <img src="{% static "blog/images/jason.jpg" %}" alt="Jason - The Author of This Blog">
         <h2>JASON'S BLOG</h2>
     </header>
     <p>Hi, I am Jason and I love to blog about tech and the world!</p>
@@ -23,7 +23,8 @@
     <ul>
         <li>
             <article class="post">
-                <a href="" alt="Mountain Hiking">
+                <a href="">
+                    <img src="{% static "blog/images/mountains.jpg" %}" alt="Mountain Hiking">
                     <div class="post__content">
                         <h3>Mountain Hiking</h3>
                         <p>There's nothing like the views you get when hiking in the mountains! And I wasn't even preapared for what happened whilst I was enjoing the view!</p>
