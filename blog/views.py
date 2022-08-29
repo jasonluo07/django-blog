@@ -6,7 +6,7 @@ def index(request):
 
 
 def post_list(request):
-    pass
+    return render(request, "blog/post-list.html")
 
 
 def post_detail(request):
