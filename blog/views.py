@@ -63,8 +63,18 @@ all_posts = [
 ]
 
 
+def get_date(entity):
+    return entity["date"]
+
+
 def index(request):
-    return render(request, "blog/index.html")
+    sorted_posts = sorted(all_posts, key=get_date, reverse=True)
+    latest_posts = sorted_posts[:3]
+    context = {
+        "posts": latest_posts,
+    }
+
+    return render(request, "blog/index.html", context)
 
 
 def post_list(request):
