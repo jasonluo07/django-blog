@@ -23,8 +23,10 @@ def post_list(request):
 
 def post_detail(request, slug):
     identified_post = get_object_or_404(Post, slug=slug)
+    tags = identified_post.tags.all()
     context = {
         "post": identified_post,
+        "tags": tags,
     }
 
     return render(request, "blog/post-detail.html", context)
