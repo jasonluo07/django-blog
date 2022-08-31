@@ -1,6 +1,6 @@
 from django.contrib import admin
 
-from .models import Author, Post, Tag
+from .models import Author, Comment, Post, Tag
 
 
 @admin.register(Author)
@@ -49,3 +49,19 @@ class PostAdmin(admin.ModelAdmin):
         "created_time",
     )
     list_display_links = ("caption",)
+
+
+@admin.register(Comment)
+class CommentAdmin(admin.ModelAdmin):
+    list_display = (
+        "id",
+        "text",
+        "user_name",
+        "user_email",
+        "post",
+    )
+    list_display_links = (
+        "id",
+        "text",
+        "post",
+    )
