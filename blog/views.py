@@ -28,13 +28,24 @@ class PostListView(ListView):
 
 
 class PostDetailView(View):
+    def get_is_saved_post(self, request, post_id):
+        saved_posts = request.session.get("saved_posts")
+        if saved_posts and post_id in saved_posts:
+            is_saved_post = True
+        else:
+            is_saved_post = False
+
+        return is_saved_post
+
     def get(self, request, slug):
         post = Post.objects.get(slug=slug)
+
         context = {
             "post": post,
             "tags": post.tags.all(),
             "comment_form": CommentForm(),
             "comments": post.comments.order_by("-id"),
+            "is_saved_post": self.get_is_saved_post(request, post.id),
         }
 
         return render(request, "blog/post-detail.html", context)
@@ -58,3 +69,34 @@ class PostDetailView(View):
         }
 
         return render(request, "blog/post-detail.html", context)
+
+
+class ReadLaterView(View):
+    def get(self, request):
+        saved_posts = request.session.get("saved_posts")
+        context = {}
+
+        if not saved_posts:
+            context["posts"] = []
+        else:
+            posts = Post.objects.filter(id__in=saved_posts)
+            context["posts"] = posts
+
+        return render(request, "blog/saved-posts.html", context)
+
+    def post(self, request):
+        saved_posts = request.session.get("saved_posts")
+
+        if not saved_posts:
+            saved_posts = []
+
+        post_id = int(request.POST["post_id"])
+
+        if post_id not in saved_posts:
+            saved_posts.append(post_id)
+        else:
+            saved_posts.remove(post_id)
+
+        request.session["saved_posts"] = saved_posts
+
+        return HttpResponseRedirect("/")

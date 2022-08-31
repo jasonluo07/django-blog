@@ -15,6 +15,7 @@
     <header id="main-navigation">
         <h1><a href="{% url "blog:index" %}">Jason's Blog</a></h1>
         <nav>
+            <a href="{% url "blog:read-later" %}">Saved Posts</a>
             <a href="{% url "blog:post-list" %}">All Posts</a>
         </nav>
     </header>
