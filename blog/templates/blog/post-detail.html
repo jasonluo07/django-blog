@@ -24,6 +24,14 @@
     </article>
 </section>
 
+{% if comment_form.errors %}
+<div id="alert">
+    <h2>Saving the comment failed!</h2>
+    <p>Please check the comment from below the post and fix your errors.</p>
+    <a href="#comment-form">Fix!</a>
+</div>
+{% endif %}
+
 <main>
     {{ post.content|linebreaks }}
 </main>
@@ -33,7 +41,7 @@
     <form action="{% url "blog:post-detail" post.slug %}" method="POST">
         {% csrf_token %}
         {% for form_field in comment_form %}
-        <div class="form-control">
+        <div class="form-control {% if form_field.errors %}invalid{% endif %}">
             {{ form_field.label_tag }}
             {{ form_field }}
             {{ form_field.errors }}
