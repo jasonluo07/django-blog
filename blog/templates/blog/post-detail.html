@@ -23,25 +23,25 @@
             <input type="hidden" value="{{ post.id }}" name="post_id">
             <button>
                 {% if is_saved_post %}
-                Remove from "Read Later" List
+                取消儲存
                 {% else %}
-                Read Later
+                儲存
                 {% endif %}
             </button>
         </form>
     </div>
     <article>
         <img src="{{ post.image.url }}" alt="{{ post.title }}">
-        <address>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></address>
-        <div>Last updated on <time>{{ post.created_time|date:"d M Y" }}</time></div>
+        <!-- <address>By <a href="mailto:{{ post.author.email_address }}">{{ post.author }}</a></address> -->
+        <div>最後更新時間：<time>{{ post.created_time|date:"Y-m-d" }}</time></div>
     </article>
 </section>
 
 {% if comment_form.errors %}
 <div id="alert">
-    <h2>Saving the comment failed!</h2>
-    <p>Please check the comment from below the post and fix your errors.</p>
-    <a href="#comment-form">Fix!</a>
+    <h2>儲存評論失敗！</h2>
+    <p>請檢查文章下方的評論並修復您的錯誤！</p>
+    <a href="#comment-form">修正</a>
 </div>
 {% endif %}
 
@@ -61,7 +61,7 @@
 </section>
 
 <section id="comment-form">
-    <h2>Your Comment</h2>
+    <h2>您的評論</h2>
     <form action="{% url "blog:post-detail" post.slug %}" method="POST">
         {% csrf_token %}
         {% for form_field in comment_form %}
@@ -71,7 +71,7 @@
             {{ form_field.errors }}
         </div>
         {% endfor %}
-        <button>Save Comment</button>
+        <button>儲存評論</button>
     </form>
 </section>
 {% endblock %}

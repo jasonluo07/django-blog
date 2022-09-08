@@ -2,7 +2,7 @@
 {% load static %}
 
 {% block title %}
-<title>My Stored Posts</title>
+<title>儲存文章</title>
 {% endblock %}
 
 {% block css_files %}
@@ -12,7 +12,7 @@
 {% block content %}
 <section id="saved-posts">
     {% if not posts %}
-    <p>You didn't save any posts for later.</p>
+    <p>您沒有儲存任何文章。</p>
     {% else %}
     <ul>
         {% for post in posts %}
